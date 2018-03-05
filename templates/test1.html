@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test1</title>
+     <link href="/static/test1.css" rel="stylesheet">
+       <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/bootstrap/js/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/static/bootstrap/js/jquery.min.js"><\/script>')</script>
+
+</head>
+<body>
+<div class="clearfix">
+    <ul>
+        <li style="list-style: none;cursor:pointer">文件</li>
+        <li style="list-style: none;cursor:pointer">服务器</li>
+    </ul>
+</div>
+
+<meta charset="UTF-8">
+<h2>服务器配置</h2>
+<span>IP</span>
+<div class="col-md-10" >
+    <input class="form-group" id="ip">
+</div>
+
+<span>主机端口</span>
+<div class="col-md-10">
+    <input class="form-group" id="port">
+</div>
+
+<span>主机用户名</span>
+<div class="col-md-10">
+    <input class="form-group">
+</div>
+
+<span>主机密码</span>
+<div class="col-md-10">
+    <input class="form-group">
+</div>
+
+<div class="col-md-10">
+    <button class="btn btn-primary" onclick="submitServerConfig();">创建服务器</button>
+    <button class="btn btn-default">返回</button>
+    <button class="btn btn-primary">重置</button>
+</div>
+<script>
+function submitServerConfig(){
+ //获取你填写的主机IP
+    var myIP=document.getElementById("ip").value;//js原生写法
+   // var myIP=("#ip").val();   //jquery写法
+    //alert(myIP);
+    var myPort=$("#port").val();
+    alert(myPort);
+
+    var data={
+        "ip":myIP,
+        "port":myPort,
+    }
+
+    jQuery.ajax({
+        "url":"baidu.com",
+        "data":data,
+        "error":errorShow,
+        "success":successShow,
+    });
+}
+
+    function errorShow(){
+        alert("发生错误");
+    }
+    function successShow(){
+        alert("成功");
+    }
+
+</script>
+</body>
+</html>

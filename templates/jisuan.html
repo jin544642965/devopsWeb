@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+{% block page-content %}
+<h1 >计算</h1>
+  <form action="/do_jisuan" class="form-horizontal" method="POST" role="form">
+  <div class="form-group">
+    <div class="col-sm-10">
+	    <label class="col-sm-2 control-label">第N天的返现：&nbsp</label><input  type="text" name="days"  value="7" placeholder="输入第几天"/>
+    </div>
+  </div>
+      <div class="form-group">
+        <div class="col-sm-10">
+            <label class="col-sm-2 control-label">投资金额(元)：</label>
+            <input type="text" name="invest" value="30000"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-10">
+            <label class="col-sm-2 control-label">返现比例：</label>
+            <input type="text" name="proportion"  value="0.0005" placeholder="0.0005"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-10">
+            <label class="col-sm-2 control-label">投资倍数：</label>
+            <input type="text" name="times"  value="12.5" placeholder="12.5"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+         <div class="col-sm-offset-2 col-sm-10">
+ 	        <input type="submit" value="提交" class="btn btn-primary">
+         </div>
+      </div>
+  </form>
+
+
+
+<table class="table" id="tab-1">
+<tbody>
+<h4>投资(元)</h4>
+    <tr>
+        <th>投资金额</th>
+        <th>返现比例</th>
+        <th>投资倍数</th>
+        <th>收益总额(元)：</th>
+    </tr>
+
+    <tr>
+        <td>{{ invest }}</td>
+        <td>{{ proportion }}</td>
+        <td>{{ times }}</td>
+        <td>{{ sum_money }}</td>
+    </tr>
+
+</tbody>
+</table>
+
+<h4>返现(元)</h4>
+<table class="table" id="tab-2">
+        <tr>
+            <th>天数：</th>
+            <th>金额：</th>
+        </tr>
+    {%for d in days_list%}
+        <tr>
+            <td>第{{ d }}天</td>
+            <td>{{ val }}</td>
+        </tr>
+{% endfor %}
+</table>
+{% endblock %}

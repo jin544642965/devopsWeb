@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+{% extends 'index.html' %}
+{% block page-content %}
+<h1 class="page-header">执行命令</h1>
+
+    <input type="text" name="my_command_input" id="test-command-id"/>
+    <button type="submit" class="btn btn-success" onclick="getCommandValue()">执行</button>
+    <div style="border: 3px solid green;height:300px;width:600px" id="showCommandResult">
+
+    </div>
+
+<script type="text/javascript">
+function getCommandValue(){
+    var commandInput=document.getElementById("test-command-id");
+    var commandValue=commandInput.value; //解析到了前端输入框里面输入的值
+    alert(commandValue);
+    jQuery.ajax(
+    {
+        "url":"/sm/execute_command",
+        "data":{"my_command_input":commandValue},
+
+        "success": function (data) {
+            //alert("很好，命令已得到了返回结果");
+            var info=JSON.parse(data);
+            var status=info["status"];
+            var content=info["content"];
+            if(status){
+                alert("命令执行成功");
+            }
+            else{
+                alert("命令执行失败");
+            }
+            var myDiv=document.getElementById("showCommandResult");   //绑定DIV
+            myDiv.innerText+=content;
+        },
+        "error":function () {
+            alert("后端服务器发生了错误");
+        },
+    });
+}
+
+function loadCommandHtml(){
+    $("#showMainArea").load("execute_command.html")
+}
+
+function successShow(){
+    ("#showSuccessNotice").css({
+        "display":"block"
+    })
+    setTimeout()
+}
+</script>
+{% endblock %}
+
+
